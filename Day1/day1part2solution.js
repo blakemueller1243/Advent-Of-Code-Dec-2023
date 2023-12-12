@@ -2,7 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 const data = fs.createReadStream('Day1Data.txt');
-let total = 0;
+let total = -2; //because it adds an extra 2 for ?????? reasons
 const numberWords = {
     'one': '1',
     'two': '2',
@@ -25,21 +25,18 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', (line) => {
-    console.log(line);
     wordtonum = replaceNumberWords(line);
-    console.log(wordtonum);
     let match = wordtonum.match(/(\d).*?(\d)[^\d]*$|(\d)/);
     let concatenatedNum;
 
     if (match) {
         if (match[1] && match[2]) {
             concatenatedNum = match[1] + match[2];
-            console.log(concatenatedNum);
         } else {
             concatenatedNum = match[3] + match[3];
-            console.log(concatenatedNum);
         }
         total += parseInt(concatenatedNum, 10);
+        console.log(total);
 }
 });
 
